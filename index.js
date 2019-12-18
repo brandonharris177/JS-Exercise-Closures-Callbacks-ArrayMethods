@@ -187,7 +187,7 @@ function processDuplicateFree(/* CODE HERE ONLY AFTER COMPLETING ALL OTHER TASKS
 */
 
 function getFullNames(runners) {
-  console.log(runners)
+  // console.log(runners)
   let runnerNames = [];
   runners.forEach(runner => { 
     // console.log(`${runner.last_name}, ${runner.first_name} `)
@@ -247,9 +247,11 @@ function getRunnersByTShirtSize(runners, tShirtSize) {
  * @returns a number which is the sum of the donations by all runners.
 */
 function tallyUpDonations(runners) {
-  runners.map(runner => {
-    return(runner.donation)
-  })
+  let totalDonations = runners.reduce(function(acc, current) {
+    return acc + current.donation;
+  }, 0);
+
+  return totalDonations;
 }
 
 /////////////// CLOSURES ///////////////
@@ -270,9 +272,9 @@ function tallyUpDonations(runners) {
 */
 function counterMaker() {
   // BROKEN CODE STARTS
-  const count = 0;
-  function counter() {
-    ++count
+  let count = 0;
+  return function counter() {
+    return count++
   }
   // BROKEN CODE ENDS
 }
@@ -297,8 +299,17 @@ function counterMaker() {
  * counter() // should return 0
  * etc
 */
-function counterMakerWithLimit(/* CODE HERE */) {
+function counterMakerWithLimit(maxValue) {
   /* CODE HERE */
+  var count = 0;
+  return function counter() {
+    if (count > maxValue) {
+    count = 0
+    } 
+    console.log(`max value = ${maxValue}`)
+    console.log(`count = ${count}`)
+    return count++
+  }
 }
 
 /////////////// END OF CHALLENGE ///////////////
